@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="fr" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="fr" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="fr" class="no-js">
+    <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <meta name="MobileOptimized" content="320"/>
+        <title>{%block title%}TEST{%endblock%}</title>
+
+        {% stylesheets
+            '@KLCmsBundle/Resources/public/plugins/font-awesome/css/font-awesome.css'
+            '@KLCmsBundle/Resources/public/plugins/bootstrap/css/bootstrap.min.css'
+            '@KLCmsBundle/Resources/public/plugins/uniform/css/uniform.default.css'
+            '@KLCmsBundle/Resources/public/plugins/select2/select2_metro.css'
+            '@KLCmsBundle/Resources/public/css/style-metronic.css' 
+            '@KLCmsBundle/Resources/public/css/style.css' 
+            '@KLCmsBundle/Resources/public/css/style-responsive.css' 
+            '@KLCmsBundle/Resources/public/css/plugins.css'
+            '@KLCmsBundle/Resources/public/css/themes/default.css'
+            '@KLCmsBundle/Resources/public/css/custom.css'
+        %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+        {%endstylesheets%}
+
+        {%block stylesheets%}{%endblock%}
+        <link rel="shortcut icon" href="favicon1.png"/>
+    </head>
+    <body class="page-header-fixed">
+        <div class="header navbar navbar-inverse navbar-fixed-top">
+            <!-- BEGIN TOP NAVIGATION BAR -->
+            <div class="header-inner">
+                <!-- BEGIN LOGO -->
+                <a class="navbar-brand" href="index.html">
+            {# <img src="http://hab.starterre.net/img/logo.png" height="14"> #}
+                </a>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            {# FA > 4.0.1 <i class="fa fa-bars"></i> #}
+                    <i class="fa fa-reorder"></i>
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <ul class="nav navbar-nav pull-right">
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <span class="username">
+                                USER {# @TODO #}
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#{# TODO { path('st_backoffice_parametres_compte') }#}">
+                                    <i class="fa fa-user"></i> {{ 'menu.moncompte'|trans }}
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:;" id="trigger_fullscreen">
+                                    <i class="fa fa-move"></i> {{ 'menu.pleinecran'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#{#{ path('fos_user_security_logout') }#}">
+                                    <i class="fa fa-key"></i> {{ 'menu.deconnexion'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END TOP NAVIGATION BAR -->
+        </div>
+
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+            {{ knp_menu_render('main', {'allow_safe_labels': true})|raw }}
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+            {% block body %}{% endblock %}
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END CONTAINER --> 
+
+
+        <!-- BEGIN FOOTER -->
+        <div class="footer">
+            <div class="footer-inner">
+            </div>
+            <div class="footer-tools">
+                <span class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </span>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+
+        {% javascripts
+            '@KLCmsBundle/Resources/public/plugins/jquery-1.10.2.min.js'
+            '@KLCmsBundle/Resources/public/plugins/jquery-migrate-1.2.1.min.js'
+            '@KLCmsBundle/Resources/public/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js'
+            '@KLCmsBundle/Resources/public/plugins/bootstrap/js/bootstrap.min.js'
+            '@KLCmsBundle/Resources/public/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js'
+            '@KLCmsBundle/Resources/public/plugins/bootstrap-fileupload/bootstrap-fileupload.js'
+            '@KLCmsBundle/Resources/public/plugins/jquery-slimscroll/jquery.slimscroll.min.js'
+            '@KLCmsBundle/Resources/public/plugins/jquery.blockui.min.js'
+            '@KLCmsBundle/Resources/public/plugins/jquery.cokie.min.js'
+            '@KLCmsBundle/Resources/public/plugins/jquery-history/jquery.history.js'
+            '@KLCmsBundle/Resources/public/plugins/uniform/jquery.uniform.min.js'
+            '@KLCmsBundle/Resources/public/plugins/select2/select2.min.js'
+            '@KLCmsBundle/Resources/public/plugins/data-tables/jquery.dataTables.min.js'
+            '@KLCmsBundle/Resources/public/plugins/data-tables/DT_bootstrap.js'
+            '@KLCmsBundle/Resources/public/scripts/app.js'
+            '@KLCmsBundle/Resources/public/scripts/custom.js'
+        %}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+        {% endjavascripts %}
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                App.init();
+                Custom.init();
+            })
+        </script>
+        {% block javascriptbottom %}{% endblock %}
+    </body>
+</html>
+
+
