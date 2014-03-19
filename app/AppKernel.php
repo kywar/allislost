@@ -22,8 +22,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             
             new KL\CmsBundle\KLCmsBundle(),
-            new KL\SiteBundle\KLSiteBundle(),
-            new KL\UserBundle\KLUserBundle(),
             /*new KL\ContactBundle\KLContactBundle(),
             new KL\SiteBundle\KLSiteBundle(),
             new KL\UserBundle\KLUserBundle(),

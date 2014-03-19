@@ -3,14 +3,15 @@
 namespace KL\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use KL\CmsBundle\Model\CmsActualite as SuperActualite;
 
 /**
  * CmsActualite
  *
  * @ORM\Table(name="cms_actu")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="KL\CmsBundle\Entity\CmsActualiteRepository")
  */
-class CmsActualite
+class CmsActualite extends SuperActualite
 {
     /**
      * @var integer
