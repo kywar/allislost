@@ -1,10 +1,4 @@
-#site:
-#    resource: "@KLSiteBundle/Controller/"
-#    type:     annotation
-#    prefix:   /
-    
-    
-fo: 
-    resource: @KLCmsBundle/Controller/
-    type: annotation
-    prefix: /
+KLShopBundle:
+    resource: "@KLShopBundle/Controller/"
+    type:     annotation
+    prefix:   /

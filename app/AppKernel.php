@@ -20,19 +20,13 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),            
             
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            
-            new KL\CmsBundle\KLCmsBundle(),
-            /*new KL\ContactBundle\KLContactBundle(),
-            new KL\SiteBundle\KLSiteBundle(),
+
+            new KL\ShopBundle\KLShopBundle(),
             new KL\UserBundle\KLUserBundle(),
-            //new KL\FeedbackBundle\KLFeedbackBundle()
-            //new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
-            //new KL\PlayerBundle\KLPlayerBundle(),
-            //new KL\GameBundle\KLGameBundle()*/
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
+            //$bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
