@@ -1,8 +1,8 @@
 <?php
-
 namespace KL\ShopBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use KL\ShopBundle\Model\ProduitModel;
@@ -15,6 +15,7 @@ use KL\ShopBundle\Model\ProduitModel;
  */
 class Produit extends ProduitModel
 {
+
     /**
      * @var integer
      *
@@ -53,22 +54,29 @@ class Produit extends ProduitModel
     private $addedAt;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="annee", type="integer")
+     * @ORM\ManyToOne(targetEntity="Marque", inversedBy="produits")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="marqueId", referencedColumnName="id")
+     * })
      */
-    private $annee;
-    
+    private $marque;
+
     /**
-    * @ORM\OneToMany(targetEntity="ProduitPhoto", mappedBy="produit")
-    */
+     * @ORM\OneToMany(targetEntity="ProduitPhoto", mappedBy="produit")
+     */
     private $photos;
-    
+
     /**
-    * @ORM\OneToMany(targetEntity="ProduitPrix", mappedBy="produit")
-    */
+     * @ORM\OneToMany(targetEntity="ProduitPrix", mappedBy="produit")
+     */
     private $prices;
     
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
 
     /**
      * Get id
@@ -89,7 +97,7 @@ class Produit extends ProduitModel
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -112,7 +120,7 @@ class Produit extends ProduitModel
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -135,7 +143,7 @@ class Produit extends ProduitModel
     public function setReference($reference)
     {
         $this->reference = $reference;
-    
+
         return $this;
     }
 
@@ -158,7 +166,7 @@ class Produit extends ProduitModel
     public function setAddedAt($addedAt)
     {
         $this->addedAt = $addedAt;
-    
+
         return $this;
     }
 
@@ -173,30 +181,6 @@ class Produit extends ProduitModel
     }
 
     /**
-     * Set annee
-     *
-     * @param integer $annee
-     * @return Produit
-     */
-    public function setAnnee($annee)
-    {
-        $this->annee = $annee;
-    
-        return $this;
-    }
-
-    /**
-     * Get annee
-     *
-     * @return integer 
-     */
-    public function getAnnee()
-    {
-        return $this->annee;
-    }
-    
-
-    /**
      * Add photos
      *
      * @param ProduitPhoto $photos
@@ -205,7 +189,7 @@ class Produit extends ProduitModel
     public function addPhoto(ProduitPhoto $photos)
     {
         $this->photos[] = $photos;
-    
+
         return $this;
     }
 
@@ -238,7 +222,7 @@ class Produit extends ProduitModel
     public function addPrice(ProduitPrix $prices)
     {
         $this->prices[] = $prices;
-    
+
         return $this;
     }
 
@@ -261,4 +245,51 @@ class Produit extends ProduitModel
     {
         return $this->prices;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new ArrayCollection();
+        $this->prices = new ArrayCollection();
+        $this->addedAt = new \DateTime();
+    }
+
+    /**
+     * Set marque
+     *
+     * @param Marque $marque
+     * @return Produit
+     */
+    public function setMarque(Marque $marque = null)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return Marque 
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active)
+    {
+        $this->active = $active;
+        
+         return $this;
+    }
+
+
 }

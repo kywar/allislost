@@ -1,11 +1,8 @@
 <?php
 namespace KL\ShopBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use KL\ShopBundle\Model\MarqueModel;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Marque
@@ -36,14 +33,14 @@ class Marque extends MarqueModel
     /**
      * @var string
      *
-     * @ORM\Column(name="website", type="string", length=255, nullable=true)
+     * @ORM\Column(name="website", type="string", length=255)
      */
     private $website;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="logo", type="string", length=255, nullable=true)
+     * @ORM\Column(name="logo", type="string", length=255)
      * @Assert\File(maxSize="6000000")
      */
     private $logo;
@@ -137,49 +134,4 @@ class Marque extends MarqueModel
         return $this->getLogo();
     }
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->produits = new ArrayCollection();
-    }
-    
-    /**
-     * Add produits
-     *
-     * @param Produit $produits
-     * @return Marque
-     */
-    public function addProduit(Produit $produits)
-    {
-        $this->produits[] = $produits;
-    
-        return $this;
-    }
-
-    /**
-     * Remove produits
-     *
-     * @param Produit $produits
-     */
-    public function removeProduit(Produit $produits)
-    {
-        $this->produits->removeElement($produits);
-    }
-
-    /**
-     * Get produits
-     *
-     * @return Collection 
-     */
-    public function getProduits()
-    {
-        return $this->produits;
-    }
-    
-    public function __toString()
-    {
-        return $this->getName();
-    }
 }

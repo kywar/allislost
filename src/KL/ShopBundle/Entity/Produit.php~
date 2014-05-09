@@ -3,16 +3,17 @@
 namespace KL\ShopBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use KL\ShopBundle\Model\ProduitModel;
 
 /**
  * Produit
  *
- * @ORM\Table()
+ * @ORM\Table(name="shop_produit")
  * @ORM\Entity
  */
-class Produit
+class Produit extends ProduitModel
 {
     /**
      * @var integer
@@ -59,20 +60,23 @@ class Produit
     private $annee;
     
     /**
-    * @ORM\OneToMany(targetEntity="ProduitPhoto", mappedBy="produit")
+     * @ORM\ManyToOne(targetEntity="Marque", inversedBy="produits")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="marqueId", referencedColumnName="id")
+     * })
      */
+    private $marque;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="ProduitPhoto", mappedBy="produit")
+    */
     private $photos;
     
     /**
     * @ORM\OneToMany(targetEntity="ProduitPrix", mappedBy="produit")
-     */
+    */
     private $prices;
     
-    public function __construct()
-    {
-        $this->photos = new ArrayCollection();
-        $this->prices = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -199,4 +203,70 @@ class Produit
         return $this->annee;
     }
     
+
+    /**
+     * Add photos
+     *
+     * @param ProduitPhoto $photos
+     * @return Produit
+     */
+    public function addPhoto(ProduitPhoto $photos)
+    {
+        $this->photos[] = $photos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove photos
+     *
+     * @param ProduitPhoto $photos
+     */
+    public function removePhoto(ProduitPhoto $photos)
+    {
+        $this->photos->removeElement($photos);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Add prices
+     *
+     * @param ProduitPrix $prices
+     * @return Produit
+     */
+    public function addPrice(ProduitPrix $prices)
+    {
+        $this->prices[] = $prices;
+    
+        return $this;
+    }
+
+    /**
+     * Remove prices
+     *
+     * @param ProduitPrix $prices
+     */
+    public function removePrice(ProduitPrix $prices)
+    {
+        $this->prices->removeElement($prices);
+    }
+
+    /**
+     * Get prices
+     *
+     * @return Collection 
+     */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
 }
