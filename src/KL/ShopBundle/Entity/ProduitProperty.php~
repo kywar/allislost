@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProduitProperty
 {
+
     /**
      * @var integer
      *
@@ -27,23 +28,108 @@ class ProduitProperty
      * })
      */
     private $produitId;
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="propertyId", type="integer")
+     * @var string
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="Property")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="propertyId", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $propertyId;
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="format", type="string", length=255)
+     */
+    private $format;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="required", type="boolean")
+     */
+    private $required;
+
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="public", type="boolean")
+     */
+    private $public;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="ordering", type="integer", nullable=true)
+     */
+    private $ordering;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="position", type="string", length=255, nullable=true)
+     */
+    private $position;
+
     /**
      * @var string
      * 
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="value", type="string", length=255)
      */
     private $value;
+
+    /**
+     * Set produitId
+     *
+     * @param integer $produitId
+     * @return ProduitProperty
+     */
+    public function setProduitId($produitId)
+    {
+        $this->produitId = $produitId;
+
+        return $this;
+    }
+
+    /**
+     * Get produitId
+     *
+     * @return integer 
+     */
+    public function getProduitId()
+    {
+        return $this->produitId;
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $value
+     * @return ProduitProperty
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string 
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
 
 }
