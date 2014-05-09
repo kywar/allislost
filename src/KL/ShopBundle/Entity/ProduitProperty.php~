@@ -1,0 +1,49 @@
+<?php
+/**
+ * @package 
+ */
+namespace KL\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ProduitProperty
+ * @author Pierre MICHEL <pierre@adstrategy.fr>
+ * 
+ * @ORM\Table(name="shop_produit_property")
+ * @ORM\Entity
+ */
+class ProduitProperty
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="produitId", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="properties")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="produitId", referencedColumnName="id")
+     * })
+     */
+    private $produitId;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="propertyId", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Property")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="propertyId", referencedColumnName="id")
+     * })
+     */
+    private $propertyId;
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $value;
+
+}

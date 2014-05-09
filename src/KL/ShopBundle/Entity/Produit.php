@@ -52,6 +52,13 @@ class Produit extends ProduitModel
      * @ORM\Column(name="addedAt", type="datetime")
      */
     private $addedAt;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
 
     /**
      * @ORM\ManyToOne(targetEntity="Marque", inversedBy="produits")
@@ -72,12 +79,10 @@ class Produit extends ProduitModel
     private $prices;
     
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\OneToMany(targetEntity="ProduitProperty", mappedBy="produit")
      */
-    private $active;
-
+    private $properties;
+    
     /**
      * Get id
      *
@@ -292,4 +297,37 @@ class Produit extends ProduitModel
     }
 
 
+
+    /**
+     * Add properties
+     *
+     * @param \KL\ShopBundle\Entity\ProduitProperty $properties
+     * @return Produit
+     */
+    public function addPropertie(\KL\ShopBundle\Entity\ProduitProperty $properties)
+    {
+        $this->properties[] = $properties;
+    
+        return $this;
+    }
+
+    /**
+     * Remove properties
+     *
+     * @param \KL\ShopBundle\Entity\ProduitProperty $properties
+     */
+    public function removePropertie(\KL\ShopBundle\Entity\ProduitProperty $properties)
+    {
+        $this->properties->removeElement($properties);
+    }
+
+    /**
+     * Get properties
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
 }
